@@ -7,7 +7,11 @@ import sys
 
 start_char = '{'
 stop_char = '}'
+<<<<<<< HEAD
 n_records = 100
+=======
+n_records = 1000
+>>>>>>> c59684c8a5007ca8ba12aa306793453c1ed95f58
 level_nesting = 0
 
 while n_records != 0:
