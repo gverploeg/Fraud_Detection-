@@ -28,6 +28,7 @@ We started with a json file of the current data from the e-commerce site. We add
 
 **need**
 - how many fraud and not fraud events there are
+![](images/num_fraud.svg)
 - feature exploration and what we kept/didn't keep or parsed out
 
 ## EDA
