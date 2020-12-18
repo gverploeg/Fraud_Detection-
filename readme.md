@@ -5,7 +5,10 @@
   </header>
 <div align='left'>  
 
-![](images/Fraud-Busters.png) 
+<div align="center"> 
+<img src="images/Fraud-Busters.png" class="center">
+<div align='left'> 
+
 
 
 ## Table of Contents
@@ -67,7 +70,6 @@ For our model, with Fraud = 1 (true positive) we want the highest recall score m
 
 **Random Forest**  
 ![](images/random_forest_scores.png)
-
 
 
 ### Final Model
