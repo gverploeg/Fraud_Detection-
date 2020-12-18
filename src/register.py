@@ -34,14 +34,14 @@ APP = None
 
 def load_data(filename, label='acct_type'):
     data = pd.read_json(filename)
-    data.drop(label, axis=1, inplace=True)
+    #data.drop(label, axis=1, inplace=True)
     return data
 
 def start_server():
     print("Starting server...")
     app = Flask(__name__)
     api = restful.Api(app)
-    api.add_resource(Register, '/{0}'.format(REGISTER))
+    api.add_resource(Register, f'/{REGISTER}')
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(PORT, '0.0.0.0')
     thread = Thread(target=IOLoop.instance().start)
