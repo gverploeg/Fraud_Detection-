@@ -89,21 +89,27 @@ After tuning our hyperparameters with a grid search, we finalized our Fraud-Bust
 We investigated which features of the data were most important in flagging an incoming transaction as fraud or not-fraud. Based on the feature importances from our model, ```Previous_Payout``` is the most important factor affecting if a transaction is flagged as fraud or not-fraud. 
 
 ![](images/rf_featureimportance.svg)
+### Live Data
+We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
 
 ### Predicting with Our Model
 
+We created a prediction script that takes in the configured transaction data and outputs the predicted probability of the transaction being fraudulent. Each predicted probability is then stored in the database with its corresponding row of data.
 
-- predict.py from test_script_examples file
-- create database to store predictions
+### Triage Fraud Risk
 
-### Cost of Investigating Fraud with Our Model
-??
+We determined to triage the risk of fraud based on average ticket cost and average total quantity of ticket.  
+
+|     | **Low-Risk** | **Medium-Risk** | **High-Risk**|  
+|:----:|:------:|:------:|:-----:|  
+|**Average Ticket Cost** |  $0-$100 | $101-$250 | >$250 |  
+|**Average Total Tickets** | 0-1,000 tickets | 1,001-11,000 tickets | >11,000 tickets|  
+
 
 ## Web App
 
 ### Fraud Scoring Service
  - link to web app and maybe screenshot
 
-### Live Data
-We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
+
 
