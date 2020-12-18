@@ -7,7 +7,7 @@ import sys
 
 start_char = '{'
 stop_char = '}'
-n_records = 1000
+n_records = 100
 level_nesting = 0
 
 while n_records != 0:
