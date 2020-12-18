@@ -61,7 +61,7 @@ We decided to drop any features that were text heavy or included dates after mor
 Our team decided to build a variety of baseline models to compare before settling on the best model:
 - KNN
 - Logistic Regression
-- SVM SVC
+- SVM Support Vector Clustering (SVM-SVC)
 - Random Forest
 
 We compared models using the following three metrics:
@@ -113,11 +113,12 @@ We decided to triage the risk of fraud based on average ticket cost and average 
 ## Web App
 
 ### Fraud Scoring Service
- - link to web app and maybe screenshot
+
+![](images/risk_assessment.png)
 
 ## Future Work
 
-We would love to receive feedback and improve our model with future work, scuh as:
+We would love to receive feedback and improve our model with future work, such as:
 - Fine tune the hyperparameters more and reduce the number of features needed
 - Create more/improve triage values depending on the most important features, remove outliers, etc.
 - Deploy this web application to an AWS server instead of having it hosted locally
