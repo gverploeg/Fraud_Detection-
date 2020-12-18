@@ -116,7 +116,11 @@ We decided to triage the risk of fraud based on average ticket cost and average 
 
 ### Fraud Scoring Service
 
-![](images/risk_assessment.png)
+![](images/risk_assessment.png)  
+
+### Web App pipeline
+
+![](images/webfraud_app.png)
 
 ## Future Work
 
