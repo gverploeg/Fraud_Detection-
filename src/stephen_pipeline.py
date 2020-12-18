@@ -55,9 +55,6 @@ def createDummies(df):
     df = df.drop(['email_domain', 'truth_col', 'has_header', 'previous_payouts', 'delivery_method'], axis = 1)
     return df
 
-
-
-
 def modelData(request):
     datapoint = pd.DataFrame.from_dict(request, orient='index').T
     datapoint = ticketTypes(datapoint)
@@ -70,4 +67,4 @@ def prediction(request):
     return model.predict_proba(df.values)
 
 if __name__ == '__main__':
-    print(prediction(request))
+    print(prediction(request)[0][1])
