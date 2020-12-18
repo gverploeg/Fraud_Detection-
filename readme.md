@@ -84,9 +84,14 @@ For our model, with Fraud = 1 (true positive), a high recall score would imply w
 
 ### Final Model
 
-After tuning our hyperparameters with a grid search, we finalized our Fraud-Busters random forest fraud detection model and saved it with [pickle](src/bestRTModel.pkl).
+After tuning our hyperparameters with a grid search, we finalized our Fraud-Busters random forest fraud detection model and saved it with [pickle](src/bestRTModel.pkl). 
+
+We investigated which features of the data were most important in flagging an incoming transaction as fraud or not-fraud. Based on the feature importances from our model, ```Previous_Payout``` is the most important factor affecting if a transaction is flagged as fraud or not-fraud. 
+
+![](images/rf_featureimportance.svg)
 
 ### Predicting with Our Model
+
 
 - predict.py from test_script_examples file
 - create database to store predictions
