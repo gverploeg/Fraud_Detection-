@@ -51,9 +51,19 @@ The model will not necessarily flag incoming transactions as fraud or not fraud,
 ## Models and Analysis
 
 ### Choosing Our Model
-- models to try
-- metric to use to determine success
-- compare the models
+Our team decided to build a variety of baseline models to compare before settling on the best model:
+- Logistic Regression
+- Random Forest
+
+Based on the precision (how many selected items are relevant), recall (how many relevant items are correctly selected), and f1-score (accuracy) we decided to move forward with our **Random Forest** baseline model and continue to tune the hyperparameters and feature matrix. For our model, with Fraud = 1 (true positive) we want the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat).
+
+**Logistic Regression**  
+![](images/log_reg_scores.png)
+
+**Random Forest**  
+![](images/random_forest_scores.png)
+
+
 
 ### Final Model
 - final model in model.py file
