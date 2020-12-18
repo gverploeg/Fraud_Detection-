@@ -56,9 +56,9 @@ Our team decided to build a variety of baseline models to compare before settlin
 - Random Forest
 
 we decided to move forward with our **Random Forest** baseline model and continue to tune the hyperparameters and feature matrix based on:
-> Precision - how many selected items are relevant  
-> Recall - how many relevant items are correctly selected  
-> F1-score - accuracy  
+> **Precision** - how many selected items are relevant  
+> **Recall** - how many relevant items are correctly selected  
+> **F1-score** - accuracy  
 
 For our model, with Fraud = 1 (true positive) we want the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat).
 
