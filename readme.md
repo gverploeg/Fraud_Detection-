@@ -19,16 +19,15 @@
 
 Our team, the Fraud-Busters, was hired by an e-commerce site to weed out fraudsters. The fraudsters sent emails to users with fraudulent event tickets for purchase, and the e-commerce site would like to weed out these emails and events so no consumers click the links to purchase fradulent event tickets. The e-commerce site would like a web application that can be used to quickly triage potential fraudulent transactions as low risk, medium risk or high risk.   
 
-    *this may not be the correct background :)*
 
 ## Data  
 
 ### Initial Data
-We started with a json file of the current data from the e-commerce site. We added a target column ```Fraud``` that is set to 1 if the transaction is fraudulent and 0 if it is not fraud based on the data in the ```acct_type``` column. 
+We started with a json file of the current data from the e-commerce site. We added a target column ```Label``` that is set to 1 if the transaction is fraudulent and 0 if it is not fraud based on the data in the ```acct_type``` column. 
+
+![](images/num_fraud.svg)
 
 **need**
-- how many fraud and not fraud events there are
-![](images/num_fraud.svg)
 - feature exploration and what we kept/didn't keep or parsed out
 
 ## EDA
@@ -40,6 +39,12 @@ Failures are not created equal:
 -  False negatives cost money, and not all of those cost the same amount of money
 
 The model will not necessarily flag incoming transactions as fraud or not fraud, but instead allows the transactions to be flagged as needing further review due to the risk level. This is why the model is one that triages the most pressing (aka costly) transaction coming in.
+
+### Can We See a Difference in Words Used?
+
+![](images/notfraud_words.svg)  
+
+![](images/fraud_words.svg)  
 
 ## Models and Analysis
 
