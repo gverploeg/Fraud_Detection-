@@ -83,11 +83,8 @@ For our model, with Fraud = 1 (true positive), a high recall score would imply w
 
 
 ### Final Model
-- final model in model.py file
-- An overview of a chosen “optimal” modeling technique, with:
-5. parameter tuning involved in generating the model
-6. further steps you might have taken if you were to continue the project.
-- pickle the model
+
+After tuning our hyperparameters with a grid search, we finalized our Fraud-Busters random forest fraud detection model and saved it with [pickle](src/bestRTModel.pkl).
 
 ### Predicting with Our Model
 
@@ -95,6 +92,7 @@ For our model, with Fraud = 1 (true positive), a high recall score would imply w
 - create database to store predictions
 
 ### Cost of Investigating Fraud with Our Model
+??
 
 ## Web App
 
@@ -102,4 +100,5 @@ For our model, with Fraud = 1 (true positive), a high recall score would imply w
  - link to web app and maybe screenshot
 
 ### Live Data
-- use app with live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point)
+We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
+
