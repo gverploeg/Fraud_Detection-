@@ -4,7 +4,7 @@ import numpy as np
 import requests
 import pickle
 
-pickle_off = open('bestRfModel.pkl', 'rb')
+pickle_off = open('src/bestRfModel.pkl', 'rb')
 model = pickle.load(pickle_off)
 request = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
 cols = ['org_name', 'venue_latitude', 'venue_longitude', 'event_published', 'user_created', 
@@ -13,6 +13,7 @@ cols = ['org_name', 'venue_latitude', 'venue_longitude', 'event_published', 'use
         'event_end', 'description', 'object_id', 'country', 'venue_country', 
         'has_analytics', 'venue_address', 'num_payouts', 'name', 'event_id',
         'quantity_sold', 'ticket_types']
+
 
 def loadData(request):
     datapoint = pd.DataFrame.from_dict(request, orient='index').T
@@ -67,4 +68,4 @@ def prediction(request):
     return model.predict_proba(df.values)
 
 if __name__ == '__main__':
-    print(prediction(request)[0][1])
+    print(df1.columns)
