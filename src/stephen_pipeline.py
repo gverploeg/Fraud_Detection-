@@ -14,6 +14,7 @@ cols = ['org_name', 'venue_latitude', 'venue_longitude', 'event_published', 'use
         'has_analytics', 'venue_address', 'num_payouts', 'name', 'event_id',
         'quantity_sold', 'ticket_types']
 
+
 def loadData(request):
     datapoint = pd.DataFrame.from_dict(request, orient='index').T
     return datapoint
@@ -69,3 +70,4 @@ def prediction(request):
 if __name__ == '__main__':
     fraud_predict = prediction(request)[0][1]
     print(fraud_predict)
+

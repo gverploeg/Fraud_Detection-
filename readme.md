@@ -17,6 +17,7 @@
 3. [EDA](#eda)
 4. [Models and Analysis](#models-and-analysis)
 5. [Web App](#web-app)
+6. [Future Work](#future-work)
 
 ## Background
 
@@ -89,21 +90,37 @@ After tuning our hyperparameters with a grid search, we finalized our Fraud-Bust
 We investigated which features of the data were most important in flagging an incoming transaction as fraud or not-fraud. Based on the feature importances from our model, ```Previous_Payout``` is the most important factor affecting if a transaction is flagged as fraud or not-fraud. 
 
 ![](images/rf_featureimportance.svg)
+### Live Data
+We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
 
 ### Predicting with Our Model
 
+We created a prediction script that takes in the configured transaction data and outputs the predicted probability of the transaction being fraudulent. Each predicted probability is then stored in the database with its corresponding row of data.
 
-- predict.py from test_script_examples file
-- create database to store predictions
+### Triage Fraud Risk
 
-### Cost of Investigating Fraud with Our Model
-??
+We determined to triage the risk of fraud based on average ticket cost and average total ticket quantity.  
+
+<div align="center">    
+
+|     | **Low-Risk** | **Medium-Risk** | **High-Risk**|  
+|:----:|:------:|:------:|:-----:|  
+|**Average Ticket Cost** |  $0-$140| $141-$250 | >$250 |  
+|**Average Ticket Quantity** | 0-1,000 tickets | 1,001-12,000 tickets | >12,000 tickets|  
+
+<div align='left'>  
 
 ## Web App
 
 ### Fraud Scoring Service
  - link to web app and maybe screenshot
 
-### Live Data
-We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
+## Future Work
+
+We would love to receive feedback and keep finetuning our model with future work, scuh as:
+- Fine tune the hyperparameters more and reduce the number of features needed
+- Create more triage values depending on the most important features
+- Deploy this web application to an AWS server instead of having it hosted locally
+
+
 
