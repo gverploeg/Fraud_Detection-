@@ -23,12 +23,11 @@ Our team, the Fraud-Busters, was hired by an e-commerce site to weed out fraudst
 ## Data  
 
 ### Initial Data
-We started with a json file of the current data from the e-commerce site. We added a target column ```Label``` that is set to 1 if the transaction is fraudulent and 0 if it is not fraud based on the data in the ```acct_type``` column. 
+We started with a json file of the current data from the e-commerce site. Any of the date columns had to be converted to datetime from a Unix timestamp in seconds. We cleaned up the description column to make it easier to use in our models.  
+
+We engineered a target column ```Label``` that is set to 1 if the transaction is fraudulent and 0 if it is not fraud based on the data in the ```acct_type``` column. 
 
 ![](images/num_fraud.svg)
-
-**need**
-- feature exploration and what we kept/didn't keep or parsed out
 
 ## EDA
 
@@ -46,11 +45,13 @@ The model will not necessarily flag incoming transactions as fraud or not fraud,
 
 ![](images/fraud_words.svg)  
 
+### Cleaning Up the Feature Matrix
+-  need to add info here
+
 ## Models and Analysis
 
 ### Choosing Our Model
 - models to try
-- cleaned feature matrix
 - metric to use to determine success
 - compare the models
 
