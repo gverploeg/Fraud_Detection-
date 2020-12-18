@@ -73,6 +73,7 @@ For our model, with Fraud = 1 (true positive) we want the highest recall score m
   </header>
 <img src="images/KNN_scores.png" class="center">
 <div align='left'>   
+<br>
 
 <div align="center"> 
 <header>
@@ -80,7 +81,7 @@ For our model, with Fraud = 1 (true positive) we want the highest recall score m
   </header>
 <img src="images/log_reg_scores.png" class="center">
 <div align='left'> 
-
+<br>
 
 
 <div align="center"> 
@@ -89,7 +90,7 @@ For our model, with Fraud = 1 (true positive) we want the highest recall score m
   </header>
 <img src="images/random_forest_scores.png" class="center">
 <div align='left'> 
-
+<br>
 
 
 ### Final Model
