@@ -11,6 +11,7 @@ import dash_daq as daq
 import requests
 import plotly.graph_objects as go
 import plotly.express as px
+from stephen_pipeline  import prediction
 
 # https://bootswatch.com/lux/
 external_stylesheets = [dbc.themes.DARKLY]
@@ -23,9 +24,10 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
 server = app.server
 
 #Remove this line in production (only for testing purposes)
-predicted_probability = round(np.random.uniform(), 3)
 
 r = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
+
+predicted_probability = prediction(r)[0][1]
 
 datapoint = pd.DataFrame.from_dict(r, orient='index').T
 features = datapoint.drop(['venue_latitude', 'org_desc', 'description'], axis=1)
@@ -81,4 +83,3 @@ def move_needle(prob):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    print(predicted_probability)
