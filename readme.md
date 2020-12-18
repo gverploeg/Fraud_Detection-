@@ -121,7 +121,7 @@ We decided to triage the risk of fraud based on average ticket cost and average 
 We would love to receive feedback and improve our model with future work, such as:
 - Fine tune the hyperparameters more and reduce the number of features needed
 - Create more/improve triage values depending on the most important features, remove outliers, etc.
-- Deploy this web application to a remote server (Heroku/AWD/GCP) instead of hosting locally
+- Deploy this web application to a remote server (Heroku/AWS/GCP) instead of hosting locally
 - Determine cost to the company for investigating fraudulent transactions using our model
 
 
