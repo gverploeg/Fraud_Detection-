@@ -67,4 +67,5 @@ def prediction(request):
     return model.predict_proba(df.values)
 
 if __name__ == '__main__':
-    print(prediction(request)[0][1])
+    fraud_predict = prediction(request)[0][1]
+    print(fraud_predict)
