@@ -105,8 +105,8 @@ We decided to triage the risk of fraud based on average ticket cost and average 
 
 |     | **Low-Risk** | **Medium-Risk** | **High-Risk**|  
 |:----:|:------:|:------:|:-----:|  
-|**Average Ticket Cost** |  $0-$250| $25.01-$100 | >$100 |  
-|**Average Ticket Quantity** | 0-1,000 tickets | 1,001-12,000 tickets | >12,000 tickets|  
+|**Average Ticket Cost** |  $0-$25| $25.01-$100 | >$100 |  
+|**Average Ticket Quantity** | 0-10 tickets | 11-40 tickets | >40 tickets|  
 
 <div align='left'>  
 
