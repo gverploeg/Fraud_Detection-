@@ -4,7 +4,7 @@ import numpy as np
 import requests
 import pickle
 
-pickle_off = open('src/bestRfModel.pkl', 'rb')
+pickle_off = open('bestRfModel.pkl', 'rb')
 model = pickle.load(pickle_off)
 request = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
 cols = ['org_name', 'venue_latitude', 'venue_longitude', 'event_published', 'user_created', 
@@ -67,5 +67,15 @@ def prediction(request):
     df = modelData(request)
     return model.predict_proba(df.values)
 
+def risk(request):
+    df = modelData(request)
+    if df.cost.values[0] <= 25:
+        return('Low Risk')
+    elif df.cost.values[0] >= 25.01 and df.cost.values[0] < 100:
+        return('Medium Risk')
+    else:
+        return('High Risk')
+
 if __name__ == '__main__':
-    print(df1.columns)
+    print(modelData(request).cost.values)
+    print(risk(request))

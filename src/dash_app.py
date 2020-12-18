@@ -1,33 +1,45 @@
 import dash
-import pandas as pd
-import numpy as np
+import pandas as pd, numpy as np
 from dash.exceptions import PreventUpdate
 from dash.dependencies import Input, Output
-import dash_core_components  as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_table
 import dash_daq as daq
 import requests
-import plotly.graph_objects as go
-import plotly.express as px
+from datetime import datetime
 from stephen_pipeline  import prediction
+from DataBaseClass import DBConnect
+filepath = "/Users/americanthinker/DataScience/Projects/fraud-detection-case-study/test.db"
 
-# https://bootswatch.com/lux/
-external_stylesheets = [dbc.themes.DARKLY]
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY],
                 suppress_callback_exceptions=True,
                 meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}]
                 )
 
 server = app.server
 
-#Remove this line in production (only for testing purposes)
-
+exec = DBConnect()
 r = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
-
+stamp = datetime.now().timestamp()
 predicted_probability = prediction(r)[0][1]
+
+#testcase
+print(predicted_probability)
+print(stamp)
+
+#munge data for db insertion
+datapoint = pd.DataFrame.from_dict(r, orient='index').T
+# drop compound data types for use in other sqlite tables
+long_data = datapoint.drop(['ticket_types', 'previous_payouts'], axis=1)
+
+#update with Primary key and fraud predction
+values = long_data.loc[0].values.tolist()
+values.insert(0, stamp)
+values.insert(len(values), predicted_probability)
+
+#insert update
+exec.insert_row(filepath, values)
 
 datapoint = pd.DataFrame.from_dict(r, orient='index').T
 features = datapoint.drop(['venue_latitude', 'org_desc', 'description'], axis=1)
@@ -36,10 +48,10 @@ org_name = features.loc[0,'org_name']
 print(sample_columns.values)
 
 
-app.layout = html.Div(id='container', children=[
+app.layout = html.Div(id='container', style=dict(fontFamily='Garamond'), children=[
     dbc.Container([
-        dbc.Col(id='banner', width=12, style=dict(backgroundColor='black', textAlign='center', marginTop='20px', height='10vh'),
-                children=html.Label("Company Name and Logo")),
+        dbc.Col(id='banner', width=12, style=dict(backgroundColor='black', textAlign='center', marginTop='20px', height='8vh'),
+                children=html.H2("Fraud-Busters", style=dict(verticalTextAlign='center'))),
         html.Br(),
         html.Br(),
         html.Br(),
