@@ -63,7 +63,7 @@ Our team decided to build a variety of baseline models to compare before settlin
 - SVM SVC
 - Random Forest
 
-We compared models using the folllowing three metrics:
+We compared models using the following three metrics:
 > **Precision** - how many selected items are relevant  
 > **Recall** - how many relevant items are correctly selected  
 > **F1-score** - accuracy  
