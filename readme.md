@@ -66,10 +66,16 @@ we decided to move forward with our **Random Forest** baseline model and continu
 For our model, with Fraud = 1 (true positive) we want the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat).
 
 **Logistic Regression**  
-![](images/log_reg_scores.png)
+<div align="center"> 
+<img src="images/log_reg_scores.png" class="center">
+<div align='left'> 
+
 
 **Random Forest**  
-![](images/random_forest_scores.png)
+<div align="center"> 
+<img src="images/random_forest_scores.png" class="center">
+<div align='left'> 
+
 
 
 ### Final Model
