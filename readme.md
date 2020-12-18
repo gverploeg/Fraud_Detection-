@@ -34,13 +34,6 @@ We engineered a target column ```Label``` that is set to 1 if the transaction is
 
 ## EDA
 
-### What is Fraud?  
-
-Failures are not created equal:
--  False positives decrease customer trust
--  False negatives cost money, and not all of those cost the same amount of money
-
-The model will not necessarily flag incoming transactions as fraud or not fraud, but instead allows the transactions to be flagged as needing further review due to the risk level. This is why the model is one that triages the most pressing (aka costly) transaction coming in.
 
 ### Can We See a Difference in Words Used?
 
@@ -96,6 +89,14 @@ We created a pipeline for taking in live [data](http://galvanize-case-study-on-f
 ### Predicting with Our Model
 
 We created a prediction script that takes in the configured transaction data and outputs the predicted probability of the transaction being fraudulent. Each predicted probability is then stored in the database with its corresponding row of data.
+
+### What is Fraud?  
+
+Failures are not created equal:
+-  False positives decrease customer trust
+-  False negatives cost money, and not all of those cost the same amount of money
+
+The model will not necessarily flag incoming transactions as fraud or not fraud, but instead allows the transactions to be flagged as needing further review due to the risk level. This is why the model is one that triages the most pressing (aka costly) transaction coming in.
 
 ### Triage Fraud Risk
 
