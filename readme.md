@@ -67,12 +67,16 @@ we decided to move forward with our **Random Forest** baseline model and continu
 
 For our model, with Fraud = 1 (true positive) we initially thought we wanted the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat). So we chose are model based on the F-1 score as that would result in the highest accuracy and least amount of cost incurred.
 
+<div align="center">   
+
 | **Model** | **Precision** |  **Recall** | **F-1 Score** |  
 | :------: | :--------: | :-------: | :---------: |  
 |K-Nearest Neighbors | 0.68 | 0.51 | 0.58 |  
 | Logistic Regression | 0.92 | 0.66 |  0.77 |  
 | SVM | 0.14| 0.82| 0.24 |  
-|Random Forest | 0.95 | 0.91 |0.93 |  
+|Random Forest | 0.95 | 0.91 |0.93 |   
+
+<div align='left'>  
 
 
 
