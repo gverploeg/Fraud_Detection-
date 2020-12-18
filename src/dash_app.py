@@ -22,8 +22,8 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
 
 server = app.server
 
+#Remove this line in production (only for testing purposes)
 predicted_probability = round(np.random.uniform(), 3)
-print(predicted_probability)
 
 r = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
 
@@ -31,7 +31,8 @@ datapoint = pd.DataFrame.from_dict(r, orient='index').T
 features = datapoint.drop(['venue_latitude', 'org_desc', 'description'], axis=1)
 sample_columns = features.iloc[:, 1:11]
 org_name = features.loc[0,'org_name']
-print(org_name)
+print(sample_columns.values)
+
 
 app.layout = html.Div(id='container', children=[
     dbc.Container([

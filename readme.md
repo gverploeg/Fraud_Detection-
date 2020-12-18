@@ -49,7 +49,10 @@ The model will not necessarily flag incoming transactions as fraud or not fraud,
 ![](images/fraud_words.svg)  
 
 ### Cleaning Up the Feature Matrix
--  need to add info here
+
+We dropped dropped any features that were text heavy or included dates. We then engineered features by parsing out some of the original ones such as:
+-  ```Ticket_Types``` was engineered into ticket cost, ticket availability, and amount of total tickets
+-  ```Previous_Payouts``` was engineered into a boolean (1 or 0) for if there was a previous payout or not
 
 ## Models and Analysis
 
@@ -60,33 +63,28 @@ Our team decided to build a variety of baseline models to compare before settlin
 - SVM SVC
 - Random Forest
 
-we decided to move forward with our **Random Forest** baseline model and continue to tune the hyperparameters and feature matrix based on:
+We compared models using the following three metrics:
 > **Precision** - how many selected items are relevant  
 > **Recall** - how many relevant items are correctly selected  
 > **F1-score** - accuracy  
 
-For our model, with Fraud = 1 (true positive) we initially thought we wanted the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat). So we chose are model based on the F-1 score as that would result in the highest accuracy and least amount of cost incurred.
+For our model, with Fraud = 1 (true positive), a high recall score would imply we are correctly identifying all fraudulant transactions and reducing false negatives; thus, if we are flagging user accounts to prevent theft we would not miss any. However, if we are discussing cost relating to investigating transactions, we would want a high precision score which implies we are reducing the number of false positives (falsely identified as a threat). Likewise, if we wanted to just compare models based on accurately identifying Fraud and Not-Fraud we would look at the F-1 score. Based on all three scores, we chose the Random Forest model.
 
 <div align="center">   
 
 | **Model** | **Precision** |  **Recall** | **F-1 Score** |  
 | :------: | :--------: | :-------: | :---------: |  
 |K-Nearest Neighbors | 0.68 | 0.51 | 0.58 |  
-| Logistic Regression | 0.92 | 0.66 |  0.77 |  
+| Logistic Regression | 0.92 | 0.78 |  0.84 |  
 | SVM | 0.14| 0.82| 0.24 |  
-|Random Forest | 0.95 | 0.91 |0.93 |   
+|**Random Forest** | **0.95** | **0.91** |**0.93** |   
 
 <div align='left'>  
 
 
-
-
 ### Final Model
-- final model in model.py file
-- An overview of a chosen “optimal” modeling technique, with:
-5. parameter tuning involved in generating the model
-6. further steps you might have taken if you were to continue the project.
-- pickle the model
+
+After tuning our hyperparameters with a grid search, we finalized our Fraud-Busters random forest fraud detection model and saved it with [pickle](src/bestRTModel.pkl).
 
 ### Predicting with Our Model
 
@@ -94,6 +92,7 @@ For our model, with Fraud = 1 (true positive) we initially thought we wanted the
 - create database to store predictions
 
 ### Cost of Investigating Fraud with Our Model
+??
 
 ## Web App
 
@@ -101,4 +100,5 @@ For our model, with Fraud = 1 (true positive) we initially thought we wanted the
  - link to web app and maybe screenshot
 
 ### Live Data
-- use app with live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point)
+We created a pipeline for taking in live [data](http://galvanize-case-study-on-fraud.herokuapp.com/data_point) and configuring it to run through our pickled model. The incoming data is stored in a database along with the prediction that is returned from running the data through the model. 
+
