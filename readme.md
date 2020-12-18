@@ -17,6 +17,7 @@
 3. [EDA](#eda)
 4. [Models and Analysis](#models-and-analysis)
 5. [Web App](#web-app)
+6. [Future Work](#future-work)
 
 ## Background
 
@@ -113,6 +114,13 @@ We determined to triage the risk of fraud based on average ticket cost and avera
 
 ### Fraud Scoring Service
  - link to web app and maybe screenshot
+
+## Future Work
+
+We would love to receive feedback and keep finetuning our model with future work, scuh as:
+- Fine tune the hyperparameters more and reduce the number of features needed
+- Create more triage values depending on the most important features
+- Deploy this web application to an AWS server instead of having it hosted locally
 
 
 
