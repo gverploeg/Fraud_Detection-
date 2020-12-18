@@ -65,41 +65,21 @@ we decided to move forward with our **Random Forest** baseline model and continu
 > **Recall** - how many relevant items are correctly selected  
 > **F1-score** - accuracy  
 
-For our model, with Fraud = 1 (true positive) we want the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat).
+For our model, with Fraud = 1 (true positive) we initially thought we wanted the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat). So we chose are model based on the F-1 score as that would result in the highest accuracy and least amount of cost incurred.
 
-<div align="center"> 
-<header>
-    <h3>K-Nearest Neighbors</h3>
-  </header>
-<img src="images/KNN_scores.png" class="center">
-<div align='left'>   
-<br>
-
-<div align="center"> 
-<header>
-    <h3>Logistic Regression</h3>
-  </header>
-<img src="images/log_reg_scores.png" class="center">
-<div align='left'> 
-<br>
+| **Model** | **Precision** |  **Recall** | **F-1 Score** |  
+| :------: | :--------: | :-------: | :---------: |  
+|K-Nearest Neighbors | 0.68 | 0.51 | 0.58 |  
+| Logistic Regression | 0.92 | 0.66 |  0.77 |  
+| SVM | 0.14| 0.82| 0.24 |  
+|Random Forest | 0.95 | 0.91 |0.93 |  
 
 
-<div align="center"> 
-<header>
-    <h3>Random Forest</h3>
-  </header>
-<img src="images/random_forest_scores.png" class="center">
-<div align='left'> 
-<br>
 
 
 ### Final Model
 - final model in model.py file
 - An overview of a chosen “optimal” modeling technique, with:
-1. process flow
-2. preprocessing
-3. accuracy metrics selected
-4. validation and testing methodology
 5. parameter tuning involved in generating the model
 6. further steps you might have taken if you were to continue the project.
 - pickle the model
@@ -108,6 +88,8 @@ For our model, with Fraud = 1 (true positive) we want the highest recall score m
 
 - predict.py from test_script_examples file
 - create database to store predictions
+
+### Cost of Investigating Fraud with Our Model
 
 ## Web App
 
