@@ -98,14 +98,14 @@ We created a prediction script that takes in the configured transaction data and
 
 ### Triage Fraud Risk
 
-We determined to triage the risk of fraud based on average ticket cost and average total quantity of ticket.  
+We determined to triage the risk of fraud based on average ticket cost and average total ticket quantity.  
 
 <div align="center">    
 
 |     | **Low-Risk** | **Medium-Risk** | **High-Risk**|  
 |:----:|:------:|:------:|:-----:|  
 |**Average Ticket Cost** |  $0-$140| $141-$250 | >$250 |  
-|**Average Total Tickets** | 0-1,000 tickets | 1,001-12,000 tickets | >12,000 tickets|  
+|**Average Ticket Quantity** | 0-1,000 tickets | 1,001-12,000 tickets | >12,000 tickets|  
 
 <div align='left'>  
 
