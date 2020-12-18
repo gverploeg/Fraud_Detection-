@@ -18,6 +18,7 @@ cols = ['acct_type', 'approx_payout_date', 'description',
 
 df1 = df.drop(cols, axis = 1)
 
+<<<<<<< HEAD
 
 df1['fraud'] = np.where(df['acct_type'] == 'fraudster', 1, 0)
 df1['']
@@ -45,3 +46,13 @@ df1 = df1.drop(['email_domain', 'truth_col', 'has_header', 'previous_payouts'], 
 if __name__ == '__main__':
     print(df1..head())
 >>>>>>> parent of 8ea3153... last changes
+=======
+
+df1['fraud'] = np.where(df['acct_type'] == 'fraudster', 1, 0)
+df1['']
+
+
+
+if __name__ == '__main__':
+    print(df1.info())
+>>>>>>> parent of 46647a8... added my own stuff to work on chris
