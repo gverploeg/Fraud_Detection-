@@ -25,7 +25,7 @@ import logging
 logging.basicConfig()
 
 PORT = 5000
-IP = socket.gethostbyname(socket.gethostname())
+IP = socket.gethostbyname('localhost')
 URLS = set()
 REGISTER = 'register'
 SCORE = 'score'
@@ -38,7 +38,7 @@ def load_data(filename, label='acct_type'):
     return data
 
 def start_server():
-    print "Starting server..."
+    print("Starting server...")
     app = Flask(__name__)
     api = restful.Api(app)
     api.add_resource(Register, '/{0}'.format(REGISTER))
@@ -47,7 +47,7 @@ def start_server():
     thread = Thread(target=IOLoop.instance().start)
     thread.start()
     url = 'http://{0}:{1}/{2}'.format(IP, PORT, REGISTER)
-    print "Server started. Listening for posts at: {0}".format(url)
+    print(f"Server started. Listening for posts at: {url}")
     return app
 
 def get_random_datapoint():
@@ -64,7 +64,7 @@ def ping():
         APP = start_server()
 
     index, datapoint = get_random_datapoint()
-    print "Sending datapoint {0} to {1} urls".format(index, len(URLS))
+    print(f"Sending datapoint {index} to {len(URLS)} urls")
 
     to_remove = []
 
@@ -74,9 +74,9 @@ def ping():
             requests.post('{0}/{1}'.format(url, SCORE),
                           data=simplejson.dumps(datapoint),
                           headers=headers)
-            print "{0} sent data.".format(url)
+            print(f"{url} sent data.")
         except requests.ConnectionError as e:
-            print "{0} not listening. Removing...".format(url)
+            print(f"{url} not listening. Removing...")
             to_remove.append(url)
 
     for url in to_remove:
@@ -89,10 +89,10 @@ class Register(restful.Resource):
         port = request.form['port']
         url = 'http://{0}:{1}'.format(ip, port)
         if url in URLS:
-            print "{0} already registered".format(url)
+            print(f"{url} already registered")
         else:
             URLS.add(url)
-            print "{0} is now registered".format(url)
+            print(f"{url} is now registered")
         return {'Message': 'Added url {0}'.format(url)}
 
     def put(self):
@@ -101,25 +101,25 @@ class Register(restful.Resource):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print "Usage: python register.py test_filename.json"
-        exit()
-    print "It can take up to 30 seconds to start."
+        print("Usage: python register.py test_filename.json")
+        #exit()
+    print("It can take up to 30 seconds to start.")
     filename = sys.argv[1]
 
     if not os.path.isfile(filename):
-        print "Invalid filename: {0}".format(filename)
-        print "Goodbye."
-        exit()
+        print(f"Invalid filename: {filename}")
+        print("Goodbye.")
+        #exit()
 
-    print "Starting scheduler..."
+    print("Starting scheduler...")
     scheduler = BlockingScheduler(timezone=pytz.utc)
     scheduler.add_job(ping, 'interval', seconds=10, max_instances=100)
 
-    print "Loading data..."
+    print("Loading data...")
     DATA = load_data(filename)
 
-    print "Press Ctrl+C to exit"
+    print("Press Ctrl+C to exit")
     try:
         scheduler.start()
-    except KeyboardInterrupt, SystemExit:
-        print "Goodbye!"
+    except KeyboardInterrupt as SystemExit:
+        print("Goodbye!")
