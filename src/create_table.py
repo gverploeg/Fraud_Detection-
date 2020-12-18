@@ -49,7 +49,8 @@ table_schema = "create table if not exists longform\
                  venue_latitude text,\
                  venue_longitude text,\
                  venue_name text,\
-                 venue_state text)"
+                 venue_state text,\
+                 fraud_prediction real)"
 
 if __name__ == '__main__':
     exec = DBConnect()
