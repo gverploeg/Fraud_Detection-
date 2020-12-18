@@ -55,7 +55,9 @@ The model will not necessarily flag incoming transactions as fraud or not fraud,
 
 ### Choosing Our Model
 Our team decided to build a variety of baseline models to compare before settling on the best model:
+- KNN
 - Logistic Regression
+- SVM SVC
 - Random Forest
 
 we decided to move forward with our **Random Forest** baseline model and continue to tune the hyperparameters and feature matrix based on:
@@ -65,7 +67,13 @@ we decided to move forward with our **Random Forest** baseline model and continu
 
 For our model, with Fraud = 1 (true positive) we want the highest recall score meaning we are correctly identifying all fraudulant transactions; however, if we are discussing cost relating to investigating transactions we also want a high precision score meaning we are reducing the number of false positives (falsely identified as a threat).
 
- 
+<div align="center"> 
+<header>
+    <h3>K-Nearest Neighbors</h3>
+  </header>
+<img src="images/KNN_scores.png" class="center">
+<div align='left'>   
+
 <div align="center"> 
 <header>
     <h3>Logistic Regression</h3>
