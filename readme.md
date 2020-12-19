@@ -34,13 +34,6 @@ We engineered a target column ```Label``` that is set to 1 if the transaction is
 
 ## EDA
 
-### What is Fraud?  
-
-Failures are not created equal:
--  False positives decrease customer trust
--  False negatives cost money, and not all of those cost the same amount of money
-
-The model will not necessarily flag incoming transactions as fraud or not fraud, but instead allows the transactions to be flagged as needing further review due to the risk level. This is why the model is one that triages the most pressing (aka costly) transaction coming in.
 
 ### Can We See a Difference in Words Used?
 
@@ -61,7 +54,7 @@ We decided to drop any features that were text heavy or included dates after mor
 Our team decided to build a variety of baseline models to compare before settling on the best model:
 - KNN
 - Logistic Regression
-- SVM SVC
+- SVM Support Vector Clustering (SVM-SVC)
 - Random Forest
 
 We compared models using the following three metrics:
@@ -97,6 +90,14 @@ We created a pipeline for taking in live [data](http://galvanize-case-study-on-f
 
 We created a prediction script that takes in the configured transaction data and outputs the predicted probability of the transaction being fraudulent. Each predicted probability is then stored in the database with its corresponding row of data.
 
+### What is Fraud?  
+
+Failures are not created equal:
+-  False positives decrease customer trust
+-  False negatives cost money, and not all of those cost the same amount of money
+
+The model will not necessarily flag incoming transactions as fraud or not fraud, but instead allows the transactions to be flagged as needing further review due to the risk level. This is why the model is one that triages the most pressing (aka costly) transaction coming in.
+
 ### Triage Fraud Risk
 
 We decided to triage the risk of fraud based on average ticket cost and average total ticket quantity as shown below. 
@@ -105,22 +106,28 @@ We decided to triage the risk of fraud based on average ticket cost and average 
 
 |     | **Low-Risk** | **Medium-Risk** | **High-Risk**|  
 |:----:|:------:|:------:|:-----:|  
-|**Average Ticket Cost** |  $0-$250| $25.01-$100 | >$100 |  
-|**Average Ticket Quantity** | 0-1,000 tickets | 1,001-12,000 tickets | >12,000 tickets|  
+|**Average Ticket Cost** |  $0-$25| $25.01-$100 | >$100 |  
+|**Average Ticket Quantity** | 0-10 tickets | 11-40 tickets | >40 tickets|  
+|**Suggestions**| Don't Investigate | Flag for Future Investigation | Investigate Right Away|
 
 <div align='left'>  
 
 ## Web App
 
 ### Fraud Scoring Service
- - link to web app and maybe screenshot
+
+![](images/risk_assessment.png)  
+
+### Web App pipeline
+
+![](images/webfraud_app.png)
 
 ## Future Work
 
-We would love to receive feedback and improve our model with future work, scuh as:
-- Fine tune the hyperparameters more and reduce the number of features needed
+We would love to receive feedback and improve our model with future work, such as:
+- Additional hyperparameter tuning and increase the number of features through engineering
 - Create more/improve triage values depending on the most important features, remove outliers, etc.
-- Deploy this web application to an AWS server instead of having it hosted locally
+- Deploy this web application to a remote server (Heroku/AWS/GCP) instead of hosting locally
 - Determine cost to the company for investigating fraudulent transactions using our model
 
 
