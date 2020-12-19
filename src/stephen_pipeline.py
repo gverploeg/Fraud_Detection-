@@ -67,6 +67,11 @@ def prediction(request):
     df = modelData(request)
     return model.predict_proba(df.values)
 
+def risk_table(request):
+    df = modelData(request)
+    short_df = df.loc[:, 'cost':'quantity_total']
+    return short_df
+
 def risk(request):
     df = modelData(request)
     if df.cost.values[0] <= 25:
@@ -79,3 +84,4 @@ def risk(request):
 if __name__ == '__main__':
     print(modelData(request).cost.values)
     print(risk(request))
+    print(risk_table(request))
