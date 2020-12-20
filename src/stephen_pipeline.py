@@ -14,7 +14,6 @@ cols = ['org_name', 'venue_latitude', 'venue_longitude', 'event_published', 'use
         'has_analytics', 'venue_address', 'num_payouts', 'name', 'event_id',
         'quantity_sold', 'ticket_types']
 
-
 def loadData(request):
     datapoint = pd.DataFrame.from_dict(request, orient='index').T
     return datapoint
@@ -24,7 +23,7 @@ def ticketTypes(df):
     for x in df.ticket_types.values:
         frame_list.append(pd.DataFrame(x))
     ticket_types = pd.concat(frame_list)
-    combined_tkt = combined_tkt = ticket_types.groupby(['event_id']).agg({'cost':'mean', 'availability':'mean',                                 
+    combined_tkt = ticket_types.groupby(['event_id']).agg({'cost':'mean', 'availability':'mean',
                                                         'quantity_total':'mean', 'quantity_sold':'mean'})
     event_id = []
     for idx, row in df.iterrows():
@@ -67,7 +66,7 @@ def prediction(request):
     df = modelData(request)
     return model.predict_proba(df.values)
 
-def risk_table(request):
+def risk_table_short(request):
     df = modelData(request)
     short_df = df.loc[:, 'cost':'quantity_total']
     return short_df
@@ -84,4 +83,4 @@ def risk(request):
 if __name__ == '__main__':
     print(modelData(request).cost.values)
     print(risk(request))
-    print(risk_table(request))
+

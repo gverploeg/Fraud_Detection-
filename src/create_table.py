@@ -7,8 +7,7 @@ from DataBaseClass import DBConnect
 
 filepath = "/Users/americanthinker/DataScience/Projects/fraud-detection-case-study/test.db"
 
-table_schema = "create table if not exists longform\
-                (id real,\
+table_schema_main = "(id real,\
                  approx_payout_date real,\
                  body_length integer,\
                  channels integer,\
@@ -52,14 +51,26 @@ table_schema = "create table if not exists longform\
                  venue_state text,\
                  fraud_prediction real)"
 
+table_schema_tickets = "(id real,\
+                         availability integer,\
+                         cost real,\
+                         event_id integer,\
+                         quantity_sold integer,\
+                         quantity_total integer)"
+
+table_schema_payouts = "(id real primary key,\
+                         address text,\
+                         amount real,\
+                         country text,\
+                         created date,\
+                         event integer,\
+                         name text,\
+                         state text,\
+                         uid integer,\
+                         zip_code integer)"
+
 if __name__ == '__main__':
     exec = DBConnect()
-    exec.create_table_(filepath, table_schema)
-
-
- # ticket_types text,\
- #                 availability integer,\
- #                 cost real,\
- #                 event_id intger,\
- #                 quantity_sold integer,\
- #                 quantity_total intger)
+    exec.create_table_(filepath, 'longform', table_schema_main)
+    exec.create_table_(filepath, 'ticket_table', table_schema_tickets)
+    exec.create_table_(filepath, 'payouts', table_schema_payouts)

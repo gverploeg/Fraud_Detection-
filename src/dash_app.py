@@ -9,7 +9,7 @@ import dash_table
 import dash_daq as daq
 import requests
 from datetime import datetime
-from stephen_pipeline  import prediction, risk, risk_table
+from stephen_pipeline  import prediction, risk, ticketTypes
 from DataBaseClass import DBConnect
 filepath = "/Users/americanthinker/DataScience/Projects/fraud-detection-case-study/test.db"
 
@@ -20,13 +20,19 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY],
 
 server = app.server
 
+#create instantiation of database connection
 exec = DBConnect()
+#initiate GET request to Heroku server for JSON data packet
 r = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
+#create timestamp for use as Primary Key in all database tables
 stamp = datetime.now().timestamp()
+#using pickled ML model create prediction from data
 predicted_probability = prediction(r)[0][1]
 
-#munge data for db insertion
+#munge data for ease of use
 datapoint = pd.DataFrame.from_dict(r, orient='index').T
+org_name = datapoint['org_name'][0]
+
 # drop compound data types for use in other sqlite tables
 long_data = datapoint.drop(['ticket_types', 'previous_payouts'], axis=1)
 
@@ -34,16 +40,24 @@ long_data = datapoint.drop(['ticket_types', 'previous_payouts'], axis=1)
 values = long_data.loc[0].values.tolist()
 values.insert(0, stamp)
 values.insert(len(values), predicted_probability)
+exec.insert_row(filepath, 'longform', 43, values)
 
-#insert update
-exec.insert_row(filepath, values)
+#create ticket_type frame and then insert row in ticket_table
+ticket_type_cols = ['availability', 'cost', 'event_id', 'quantity_sold', 'quantity_total']
+ticket_table = ticketTypes(datapoint).loc[:, ticket_type_cols]
+ticket_values = ticket_table.values.tolist()[0]
+ticket_values.insert(0, stamp)
+exec.insert_row(filepath, 'ticket_table', len(ticket_values), ticket_values)
 
-datapoint = pd.DataFrame.from_dict(r, orient='index').T
-features = datapoint.drop(['venue_latitude', 'org_desc', 'description'], axis=1)
-sample_columns = features.iloc[:, 1:11]
-org_name = features.loc[0,'org_name']
+#create previous_payouts frame and then insert row in payouts table
+previous_payout = pd.DataFrame.from_dict(datapoint['previous_payouts'][0][0], orient='index').T
+payout_values = previous_payout.values.tolist()[0]
+payout_values.insert(0, stamp)
+exec.insert_row(filepath, 'payouts', len(payout_values), payout_values)
 
-risk_table = risk_table(r)
+#create risk assessment from risk table data
+risk_table_cols = ['cost', 'availability', 'quantity_total']
+risk_table = ticket_table.loc[:, risk_table_cols]
 risk_assess = risk(r)
 
 app.layout = html.Div(id='container', style=dict(fontFamily='Garamond'), children=[
@@ -92,7 +106,6 @@ app.layout = html.Div(id='container', style=dict(fontFamily='Garamond'), childre
 )
 def move_needle(prob):
     prob = round(prob, 1) * 10
-    print(prob)
     if prob == None:
         raise PreventUpdate
     else:
@@ -100,14 +113,3 @@ def move_needle(prob):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-# @app.callback(Output('live-update-text', 'children'),
-#               Input('interval-component', 'n_intervals'))
-# def update_metrics(n):
-#     lon, lat, alt = satellite.get_lonlatalt(datetime.datetime.now())
-#     style = {'padding': '5px', 'fontSize': '16px'}
-#     return [
-#         html.Span('Longitude: {0:.2f}'.format(lon), style=style),
-#         html.Span('Latitude: {0:.2f}'.format(lat), style=style),
-#         html.Span('Altitude: {0:0.2f}'.format(alt), style=style)
-#     ]
