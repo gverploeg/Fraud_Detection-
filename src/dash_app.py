@@ -81,14 +81,29 @@ app.layout = html.Div(id='container', style=dict(fontFamily='Garamond'), childre
         )),
         html.Br(),
         html.Br(),
-        html.Div(id='prob-data', children=predicted_probability, style=dict(display='none')),
-        html.Div(daq.Gauge(id='gauge',
-            color={"gradient":True,"ranges":{"green":[0,6],"yellow":[6,8],"red":[8,10]}},
-            value=2,
-            label=f'Fraud Prediction',
-            max=10,
-            min=0)
-        ),
+        html.Div(
+            dbc.Row(justify='center',
+                children=[
+                    dbc.Col(width=dict(size=4, offset=3), #style=dict(backgroundColor='crimson'),
+                            children=
+                                daq.Gauge(
+                                    id='gauge',
+                                    color={"gradient":True,"ranges":{"green":[0,6],"yellow":[6,8],"red":[8,10]}},
+                                    value=0,
+                                    label=f'Fraud Prediction',
+                                    max=10,
+                                    min=0)
+                                    ),
+                    dbc.Col(id='button-col', width=3, align='center',
+                            children=
+                                dbc.Button("Next Prediction", id='predict-button',
+                                           style=dict(fontSize=28),
+                                           size='lg',
+                                           active=False,
+                                           color='primary',
+
+                                           block=True, ))
+                        ])),
         html.Div(id='risk',
                  children=[
                         html.H3(risk_assess, style=dict(textAlign='center')),
@@ -102,13 +117,13 @@ app.layout = html.Div(id='container', style=dict(fontFamily='Garamond'), childre
 
 @app.callback(
     Output('gauge', 'value'),
-    Input('prob-data', 'children')
+    Input('predict-button', 'n_clicks')
 )
-def move_needle(prob):
-    prob = round(prob, 1) * 10
-    if prob == None:
+def move_needle(clicks):
+    if clicks is None:
         raise PreventUpdate
-    else:
+    elif clicks > 0:
+        prob = round(predicted_probability, 1) * 10
         return prob
 
 if __name__ == '__main__':
